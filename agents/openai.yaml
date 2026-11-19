@@ -1,0 +1,8 @@
+interface:
+  display_name: "排期看板网页构建"
+  short_description: "构建高可读的排期与专家运营看板网页"
+  brand_color: "#1769D1"
+  default_prompt: "Use $schedule-dashboard-web-builder to build a responsive, data-driven schedule dashboard from this brief."
+
+policy:
+  allow_implicit_invocation: true
