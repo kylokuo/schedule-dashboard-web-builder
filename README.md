@@ -15,14 +15,75 @@
 
 ## 安装
 
-将此仓库放到 Codex 的个人 skills 目录：
+### 安装到 Codex
+
+Codex 会读取个人目录下的 `SKILL.md`。Windows PowerShell：
 
 ```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills" | Out-Null
 git clone https://github.com/kylokuo/schedule-dashboard-web-builder.git `
   "$env:USERPROFILE\.codex\skills\schedule-dashboard-web-builder"
 ```
 
-如果目录已经存在，使用 `git pull` 更新即可。skill 本身不包含运行时依赖；它会优先沿用目标项目已有的框架和工具链。
+macOS/Linux：
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/kylokuo/schedule-dashboard-web-builder.git \
+  ~/.codex/skills/schedule-dashboard-web-builder
+```
+
+重新打开 Codex 或新建会话后，可以显式调用：
+
+```text
+$schedule-dashboard-web-builder
+```
+
+### 安装到 Claude Code
+
+Claude Code 会读取个人目录下的 `~/.claude/skills/<skill-name>/SKILL.md`。Windows PowerShell：
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills" | Out-Null
+git clone https://github.com/kylokuo/schedule-dashboard-web-builder.git `
+  "$env:USERPROFILE\.claude\skills\schedule-dashboard-web-builder"
+```
+
+macOS/Linux：
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/kylokuo/schedule-dashboard-web-builder.git \
+  ~/.claude/skills/schedule-dashboard-web-builder
+```
+
+重新启动 Claude Code 或开启新会话后，可以使用：
+
+```text
+/schedule-dashboard-web-builder
+```
+
+也可以直接描述要制作的网页，让 Claude Code 根据 skill 自动判断是否使用它。仓库中的 `SKILL.md` 同时适用于 Codex 和 Claude Code；`agents/openai.yaml` 只提供 Codex 的界面元数据，Claude Code 不依赖该文件。
+
+### 更新已安装的 skill
+
+如果目录已经存在，不要再次执行 `git clone`，进入对应目录拉取更新即可：
+
+Windows PowerShell 只运行你实际安装的客户端对应命令：
+
+```powershell
+git -C "$env:USERPROFILE\.codex\skills\schedule-dashboard-web-builder" pull
+git -C "$env:USERPROFILE\.claude\skills\schedule-dashboard-web-builder" pull
+```
+
+macOS/Linux 只运行你实际安装的客户端对应命令：
+
+```bash
+git -C ~/.codex/skills/schedule-dashboard-web-builder pull
+git -C ~/.claude/skills/schedule-dashboard-web-builder pull
+```
+
+skill 本身不包含运行时依赖；它会优先沿用目标项目已有的框架和工具链。
 
 ## 使用
 
